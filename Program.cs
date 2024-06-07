@@ -1,34 +1,47 @@
-using System;
-namespace Dog
+﻿using System.Security.Cryptography.X509Certificates;
+
+class Calculator
 {
-    class Dog
+    static void Main(string[] args)
     {
-        public int Age;
-        public string Breed;
-        public string Name;
-        public Dog()
+    Console.WriteLine("This program performs division with whole numbers.");
+        Console.Write("Please enter the first number: ");
+        string input1 = Console.ReadLine();
+
+        Console.Write("Please enter the second number: ");
+            string input2 = Console.ReadLine();
+        
+
+        try
         {
-            Age = 10;
-            Breed = "Pitbull";
-            Name = "Dexter";
+            int number1 = Convert.ToInt32(input1);
+            int number2 = Convert.ToInt32(input2);
+
+            int result = number1/number2;
+            Console.WriteLine($"\nThe result of {number1} divided by {number2} is {result}");
         }
-    }
-    class User_Input
-    {
-        static void Main(string[] args)
+        catch(FormatException)
         {
-            Dog Dog1 = new Dog();
-            Console.Write("Please enter the Dog's Age in a number of years.");
-            Console.WriteLine();
-            Dog1.Age = int.Parse(Console.ReadLine());
-            Console.Write("What breed is the dog?");
-            Console.WriteLine();
-            Dog1.Breed = Console.ReadLine();
-            Console.Write("What is the dog's name?");
-            Console.WriteLine();
-            Dog1.Name = Console.ReadLine();
-            Console.WriteLine();
-            Console.WriteLine($"{Dog1.Name} is a {Dog1.Breed} that is {Dog1.Age} years old");
+            Console.WriteLine("Input must be a whole number! Please try again.");
         }
+        catch(DivideByZeroException)
+        {
+            Console.WriteLine("Input can not be zero! Please try again.");
+        }
+        catch(OverflowException)
+        {
+            Console.WriteLine("Input can not exceed two billion! Please try again.");
+        }
+        catch(Exception)
+        {
+            Console.WriteLine("Input must be a whole number! Please try again.");
+        }
+        finally
+        { 
+            Console.Write("Press any key to exit ");
+            Console.ReadKey();
+        };
+        
+
     }
 }
